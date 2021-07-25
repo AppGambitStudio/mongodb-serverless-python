@@ -1,0 +1,28 @@
+service: mongodb-test
+
+provider:
+  name: aws
+  runtime: python3.6
+  timeout: 900
+  memorySize: 1024
+  tracing:
+    lambda: true
+  environment:
+    MONGODB_URL: ${file(./config.${opt:stage, 'dev'}.json):MONGODB_URL}
+    MONGODB_DB: ${file(./config.${opt:stage, 'dev'}.json):MONGODB_DB}
+    MONGODB_COL: ${file(./config.${opt:stage, 'dev'}.json):MONGODB_COL}
+
+custom:
+  pythonRequirements:
+  #   dockerizePip: non-linux
+    pythonBin: /usr/bin/python3
+
+functions:
+  mongodbreader:
+    handler: handler.reader
+
+  mongodbwriter:
+    handler: handler.writer
+
+plugins:
+  - serverless-python-requirements

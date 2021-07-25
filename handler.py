@@ -26,7 +26,7 @@ def writer(event, context):
 
   rowCount = 0
   for rowNum in range(INSERT_ROWS):      
-    testCol.insert_one({"rowNum": rowNum, "firstName": "Dhaval", "lastName": "Nagar"})  
+    testCol.insert_one({"rowNum": rowNum, "title": "json-data", "author": "dhaval nagar", "body": "Lorem ipsum dolor sit amet."})
     rowCount += 1
 
   print('Total rows written {}'.format(rowCount))
